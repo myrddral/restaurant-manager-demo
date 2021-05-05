@@ -71,6 +71,12 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+.env.local
+
+# firebase
+build
+.firebase
+
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

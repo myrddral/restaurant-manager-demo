@@ -83,7 +83,8 @@ const MeasuringMenubar = (props) => {
       await newSheet.addRows(rows);
 
       // open spreadsheet in a new window after the report is done
-      window.open(`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}`)
+      // window.open(`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}`)
+      alert('A riport beküldése megtörtént!')
       setIsReportPending(false);
     } catch (e) {
       console.log(e);

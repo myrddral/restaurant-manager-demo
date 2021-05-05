@@ -5,7 +5,6 @@ import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import getDateOfMeasure from "../utils/getDateOfMeasure";
 import db from "../db";
-// import TestForm from "./TestForm";
 
 const NewItem = () => {
   const [drinks, setDrinks] = useState(null);
@@ -18,7 +17,6 @@ const NewItem = () => {
   const [volume, setVolume] = useState("");
   const [weightEmpty, setWeightEmpty] = useState("");
   const [weightFull, setWeightFull] = useState("");
-  const [nexOrderingNumber, setNexOrderingNumber] = useState("");
   // eslint-disable-next-line
   const [totalAmount, setTotalAmount] = useState(0);
   const [dailyOrWeeklyMeasure, setDailyOrWeeklyMeasure] = useState(null)
@@ -39,7 +37,7 @@ const NewItem = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [nexOrderingNumber]);
+  }, []);
 
   const checkForExistingName = (name) => {
     let valid = true;
@@ -75,18 +73,10 @@ const NewItem = () => {
 
     const dateOfMeasure = getDateOfMeasure();
 
-    //get the highest number of ordering
-    const maxOrdering = drinks.reduce((prev, curr) =>
-      prev.ordering > curr.ordering ? prev : curr
-    ).ordering;
-
-    setNexOrderingNumber(maxOrdering)
-
     // generate "new product" object to be submitted to DB
     const dataToSubmit = {
       name: name.replace(/ +(?= )/g, "").trim(),
       category: category,
-      ordering: maxOrdering + 1,
       supplierID: supplierID.trim(),
       unit: unit.trim(),
       volume: Math.abs(volume.replace(/,/g, ".")),
@@ -247,45 +237,6 @@ const NewItem = () => {
       <Col>
       </Col>
         </Form.Row>
-        {/* <Form.Row>
-          <Col>
-            <Form.Group controlId="formBasicAmount">
-              <Form.Label>Bontatlan üvegek száma (db)</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder=""
-                // onChange={(e) => setTotalAmount(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Add meg a bontatlan üvegek számát!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="formBasicAmount">
-              <Form.Label>Bontott üveg tartalma</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder=""
-                onChange={(e) => setTotalAmount(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Add meg a bontott üveg tartalmát, ha van!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-        </Form.Row> */}
-        {/* <Form.Group controlId="formBasicSupplier">
-          <Form.Label>Beszállító</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder=""
-            onChange={(e) => setSupplierID(e.target.value)}
-            required 
-          />
-        </Form.Group> */}
 
         {!isPending && (
           <Button variant="primary" type="submit" style={{ width: 90 }}>

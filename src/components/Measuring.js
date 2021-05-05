@@ -28,7 +28,6 @@ const Measuring = () => {
       db.collection("test_collection")
         .where("category", "==", "bor")
         .where("measureFrequency", "==", `${measureFrequency}`)
-        .orderBy("ordering")
         .get()
         .then((data) => {
           const result = data.docs.map((doc) => ({
@@ -48,7 +47,6 @@ const Measuring = () => {
         .where("category", "!=", "bor")
         .where("measureFrequency", "==", `${measureFrequency}`)
         .orderBy("category")
-        .orderBy("ordering")
         .get()
         .then((data) => {
           const result = data.docs.map((doc) => ({
